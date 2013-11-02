@@ -2,6 +2,7 @@
 
 For system setup, please see the instructions [here](https://github.com/oberstet/scratchbox/blob/master/python/twisted/sharedsocket/README.md).
 
+You can get a multicore enabled AutobahnPython WebSocket echo `testee` from [here](https://github.com/tavendo/AutobahnPython/tree/master/examples/websocket/echo_multicore).
 
 
 ### Opening/Closing Handshakes
