@@ -1,4 +1,135 @@
-### Opening/Closing Handshakes
+## Opening/Closing Handshakes
+
+### Multicore Results
+
+Run testee:
+
+	oberstet@corei7-ubuntu:~/scm/AutobahnPython/examples/websocket/echo_multicore$ ~/pypy-20131102/bin/pypy -u rver.py --workers 4
+
+
+Run load probe:
+
+	oberstet@corei7-ubuntu:~/scm/wsperf$ time ./wsperf ws://127.0.0.1:9000 8 500000 1000 2000 > results.json
+
+	real	0m38.953s
+	user	1m28.652s
+	sys	0m51.076s
+
+Analyze results:
+
+	oberstet@corei7-ubuntu:~/scm/wsperf$ ~/pypy-2.1/bin/pypy analyze.py 
+
+	wsperf results - WebSocket Opening Handshake
+
+	          Duration:     37041 ms
+	             Total:    500000
+	           Success:    500000
+	              Fail:         0
+	            Fail %:      0.00
+	    Handshakes/sec:     13498
+
+	     Min:       1.3 ms
+	      SD:      20.9 ms
+	     Avg:      25.1 ms
+	  Median:      17.6 ms
+	  q90   :      43.5 ms
+	  q95   :      74.1 ms
+	  q99   :     105.7 ms
+	  q99.9 :     122.2 ms
+	  q99.99:     138.5 ms
+	     Max:     141.3 ms
+
+Testee output during load test:
+
+	--------------------------------------------------------------------------------
+	Worker Statistics (PID 2271)
+
+	Period No.        : 78
+	Period duration   : 5.001 s
+	Connected clients : 63
+
+	Period
+	  Handshakes      :                16710 #                 3341 #/s
+	  Echo'ed msgs    :                    0 #                    0 #/s
+	  Echo'ed octets  :                    0 B                    0 B/s
+	  Wire octets in  :              3341409 B               668149 B/s
+	  Wire octets out :              2736933 B               547278 B/s
+
+	Total
+	  Handshakes      :               619492 #
+	  Echo'ed msgs    :                    0 #
+	  Echo'ed octets  :                    0 B
+	  Wire octets in  :            123266371 B
+	  Wire octets out :            100966927 B
+	--------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------
+	Worker Statistics (PID 2272)
+
+	Period No.        : 78
+	Period duration   : 5.000 s
+	Connected clients : 53
+
+	Period
+	  Handshakes      :                17026 #                 3405 #/s
+	  Echo'ed msgs    :                    0 #                    0 #/s
+	  Echo'ed octets  :                    0 B                    0 B/s
+	  Wire octets in  :              3406482 B               681250 B/s
+	  Wire octets out :              2790234 B               558009 B/s
+
+	Total
+	  Handshakes      :               630383 #
+	  Echo'ed msgs    :                    0 #
+	  Echo'ed octets  :                    0 B
+	  Wire octets in  :            125435670 B
+	  Wire octets out :            102743790 B
+	--------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------
+	Worker Statistics (PID 2273)
+
+	Period No.        : 78
+	Period duration   : 5.001 s
+	Connected clients : 40
+
+	Period
+	  Handshakes      :                16700 #                 3340 #/s
+	  Echo'ed msgs    :                    0 #                    0 #/s
+	  Echo'ed octets  :                    0 B                    0 B/s
+	  Wire octets in  :              3318325 B               663582 B/s
+	  Wire octets out :              2718025 B               543537 B/s
+
+	Total
+	  Handshakes      :               626841 #
+	  Echo'ed msgs    :                    0 #
+	  Echo'ed octets  :                    0 B
+	  Wire octets in  :            124733399 B
+	  Wire octets out :            102168563 B
+	--------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------
+	Worker Statistics (PID 2270)
+
+	Period No.        : 78
+	Period duration   : 5.000 s
+	Connected clients : 114
+
+	Period
+	  Handshakes      :                16825 #                 3365 #/s
+	  Echo'ed msgs    :                    0 #                    0 #/s
+	  Echo'ed octets  :                    0 B                    0 B/s
+	  Wire octets in  :              3344195 B               668787 B/s
+	  Wire octets out :              2739215 B               547801 B/s
+
+	Total
+	  Handshakes      :               615578 #
+	  Echo'ed msgs    :                    0 #
+	  Echo'ed octets  :                    0 B
+	  Wire octets in  :            122477336 B
+	  Wire octets out :            100320632 B
+	--------------------------------------------------------------------------------
+
+### Scaling
 
 #### 1 Core
 
